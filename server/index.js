@@ -4,6 +4,8 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
+const repairRequestRoutes = require('./routes/repairRequestRoutes');
+const contractorRoutes = require('./routes/contractorRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -21,6 +23,8 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/requests', repairRequestRoutes);
+app.use('/api/contractors', contractorRoutes);
 
 // Basic route
 app.get('/', (req, res) => {

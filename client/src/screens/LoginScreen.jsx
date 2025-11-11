@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import AuthContext from '../context/AuthContext';
 
 const LoginScreen = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -8,6 +9,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,22 +22,18 @@ const LoginScreen = () => {
     if (isLogin) {
       try {
         const { data } = await axios.post('/api/users/login', { email, password }, config);
-        // Handle successful login, e.g., save token and redirect
-        console.log(data);
+        dispatch({ type: 'LOGIN', payload: data });
         navigate('/dashboard');
       } catch (error) {
         console.error(error);
-        // Handle login error
       }
     } else {
       try {
         const { data } = await axios.post('/api/users', { name, email, password }, config);
-        // Handle successful registration, e.g., save token and redirect
-        console.log(data);
+        dispatch({ type: 'LOGIN', payload: data });
         navigate('/dashboard');
       } catch (error) {
         console.error(error);
-        // Handle registration error
       }
     }
   };
