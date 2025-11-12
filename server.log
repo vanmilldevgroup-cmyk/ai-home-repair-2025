@@ -6,8 +6,10 @@ node:internal/modules/cjs/loader:1386
   throw err;
   ^
 
-Error: Cannot find module 'express'
+Error: Cannot find module './models/userModel.js'
 Require stack:
+- /app/server/middleware/authMiddleware.js
+- /app/server/routes/userRoutes.js
 - /app/server/index.js
     at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
     at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
@@ -17,10 +19,14 @@ Require stack:
     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
     at Module.require (node:internal/modules/cjs/loader:1463:12)
     at require (node:internal/modules/helpers:147:16)
-    at Object.<anonymous> (/app/server/index.js:1:17)
+    at Object.<anonymous> (/app/server/middleware/authMiddleware.js:2:14)
     at Module._compile (node:internal/modules/cjs/loader:1706:14) {
   code: 'MODULE_NOT_FOUND',
-  requireStack: [ '/app/server/index.js' ]
+  requireStack: [
+    '/app/server/middleware/authMiddleware.js',
+    '/app/server/routes/userRoutes.js',
+    '/app/server/index.js'
+  ]
 }
 
 Node.js v22.20.0
